@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+*.pyo
+.eggs/
+*.egg-info/
+dist/
+build/
+bin/
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+# OS
+.DS_Store
+Thumbs.db
+# Project
+*.log
+output/
+reports/
+remote_reports/
+.codex-tmp/

@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "1Cat-V100-QA"
+version = "0.2.6"
+description = "V100-specialized GPU QA suite optimized primarily for CUDA 12"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "Codex" }
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Operating System :: POSIX :: Linux",
+  "License :: OSI Approved :: MIT License",
+]
+
+[project.scripts]
+1cat-v100-qa = "gpuqa.cli:main"
+1cat-v100-qa-gui = "gpuqa.gui_entry:main"
+gpuqa = "gpuqa.cli:main"
+
+[project.optional-dependencies]
+build = ["pyinstaller>=6.0"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+gpuqa = [
+  "vendor/gpu-burn/ubuntu24.04-cuda12/METADATA.json",
+  "vendor/gpu-burn/ubuntu24.04-cuda12/usr/sbin/gpu-burn",
+  "vendor/gpu-burn/ubuntu24.04-cuda12/usr/share/gpu-burn/compare.ptx",
+  "vendor/gpu-burn/ubuntu24.04-cuda12/usr/share/doc/gpu-burn/README.md",
+  "vendor/gpu-burn/ubuntu24.04-cuda12/usr/share/doc/gpu-burn/copyright",
+]

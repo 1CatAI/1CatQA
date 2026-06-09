@@ -1,0 +1,9 @@
+# 1CatQA-0.2.6
+# 当前运行时没有强制的第三方业务依赖，标准库已覆盖 curses/json/html/threading 等模块。
+# 保留 setuptools 方便批量部署时直接执行：
+#   python3 -m pip install -r requirements.txt
+#   python3 -m pip install .
+setuptools>=69
+
+# 如果需要在目标机上重新打包桌面可执行程序，再额外安装：
+# pyinstaller>=6.0

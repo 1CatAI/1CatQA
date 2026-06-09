@@ -1,0 +1,16 @@
+[Unit]
+Description=1Cat-V100-QA automatic validation for V100 (CUDA 12 optimized)
+After=multi-user.target nvidia-persistenced.service
+Wants=nvidia-persistenced.service
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/gpuqa
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/env python3 -m gpuqa run --output-dir /var/lib/gpuqa/latest --burn-seconds 600 --nvlink-seconds 10 --sample-interval 5.0 --wait-for-driver-seconds 180 --max-temperature-c 80.0
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

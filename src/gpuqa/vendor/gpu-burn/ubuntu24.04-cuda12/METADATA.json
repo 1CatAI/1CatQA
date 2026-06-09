@@ -1,0 +1,15 @@
+{
+  "package": "gpu-burn",
+  "package_version": "0+git20240115+ds-2",
+  "distribution": "Ubuntu 24.04 (noble) amd64",
+  "cuda_line": "CUDA 12 runtime via Ubuntu noble package build",
+  "homepage": "https://github.com/wilicc/gpu-burn",
+  "download_url": "https://mirrors.kernel.org/ubuntu/pool/multiverse/g/gpu-burn/gpu-burn_0+git20240115+ds-2_amd64.deb",
+  "download_sha256": "633e659402eee7907d5009e94b2413457eca944df3a0483d55663a599f7fcada",
+  "installed_files": [
+    "usr/sbin/gpu-burn",
+    "usr/share/gpu-burn/compare.ptx",
+    "usr/share/doc/gpu-burn/README.md",
+    "usr/share/doc/gpu-burn/copyright"
+  ]
+}
