@@ -11,6 +11,7 @@ from dataclasses import asdict
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 import os
+from pathlib import Path
 import socket
 import threading
 import time
@@ -128,7 +129,7 @@ class _Handler(BaseHTTPRequestHandler):
                 "finished_at": entry.get("finished_at"),
                 "overall_result": entry.get("overall_result"),
                 "gpu_count": entry.get("gpu_count", 0),
-                "output_dir": entry.get("output_dir"),
+                "output_dir": str(entry.get("output_dir", "")),
             })
         self._send_json(200, {"runs": runs})
 
@@ -205,16 +206,18 @@ def _execute_run(
             sample_interval=sample_interval,
             wait_for_driver_seconds=wait_for_driver_seconds,
             max_temperature_c=max_temperature_c,
+            gpu_burn_command=None,
+            nvlink_bandwidth_command=None,
             target_gpu_index=gpu_index,
             progress_callback=_api_progress,
         )
         _last_report = report
 
-        resolved_dir = output_dir or str(build_default_output_dir())
+        resolved_dir = Path(output_dir) if output_dir else build_default_output_dir()
         from gpuqa.reporting import write_outputs
         written = write_outputs(report, resolved_dir)
 
-        entry = _build_result_entry(run_id, report, resolved_dir, written)
+        entry = _build_result_entry(run_id, report, str(resolved_dir), written)
         _results_store[run_id] = entry
         if len(_results_store) > _MAX_RESULTS:
             oldest = sorted(_results_store.keys())[0]
